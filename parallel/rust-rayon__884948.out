@@ -1,0 +1,146 @@
+===== CONFIGURATION =====
+=== ENVIRONMENT VARIABLES ===
+OMP_NUM_THREADS=1
+RAYON_NUM_THREADS=1
+=== CPU ARCHITECTURE ===
+Architecture:        x86_64
+CPU op-mode(s):      32-bit, 64-bit
+Byte Order:          Little Endian
+CPU(s):              40
+On-line CPU(s) list: 0-39
+Thread(s) per core:  2
+Core(s) per socket:  10
+Socket(s):           2
+NUMA node(s):        2
+Vendor ID:           GenuineIntel
+CPU family:          6
+Model:               63
+Model name:          Intel(R) Xeon(R) CPU E5-2660 v3 @ 2.60GHz
+Stepping:            2
+CPU MHz:             3300.000
+CPU max MHz:         3300.0000
+CPU min MHz:         1200.0000
+BogoMIPS:            5199.84
+Virtualization:      VT-x
+L1d cache:           32K
+L1i cache:           32K
+L2 cache:            256K
+L3 cache:            25600K
+NUMA node0 CPU(s):   0-9,20-29
+NUMA node1 CPU(s):   10-19,30-39
+Flags:               fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm cpuid_fault epb invpcid_single pti intel_ppin ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm xsaveopt cqm_llc cqm_occup_llc dtherm ida arat pln pts md_clear flush_l1d
+=== SLURM CONFIG ===
+JobId=884948 JobName=rust-rayonvs9f1syj.sbatch
+   UserId=u2006527(38259) GroupId=dcsugrad(301) MCS_label=N/A
+   Priority=4294691305 Nice=0 Account=ug QOS=normal
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A
+   SubmitTime=2024-04-09T00:40:21 EligibleTime=2024-04-09T00:40:21
+   AccrueTime=2024-04-09T00:40:21
+   StartTime=2024-04-09T01:10:31 EndTime=2024-04-11T01:10:31 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2024-04-09T01:10:31
+   Partition=cpu-batch AllocNode:Sid=kudu:842837
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=emu-21
+   BatchHost=emu-21
+   NumNodes=1 NumCPUs=32 NumTasks=1 CPUs/Task=32 ReqB:S:C:T=0:0:*:*
+   TRES=cpu=32,mem=60000M,node=1,billing=32
+   Socks/Node=* NtasksPerN:B:S:C=1:0:*:* CoreSpec=*
+   MinCPUsNode=32 MinMemoryNode=60000M MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=MCS Contiguous=0 Licenses=(null) Network=(null)
+   Command=/dcs/20/u2006527/Desktop/project/eurocc_cfd_optimised/hpc-multibench/rust-rayonvs9f1syj.sbatch
+   WorkDir=/dcs/20/u2006527/Desktop/project/eurocc_cfd_optimised/hpc-multibench
+   StdErr=/dcs/20/u2006527/Desktop/project/eurocc_cfd_optimised/hpc-multibench/results/parallel/rust-rayon__884948.out
+   StdIn=/dev/null
+   StdOut=/dcs/20/u2006527/Desktop/project/eurocc_cfd_optimised/hpc-multibench/results/parallel/rust-rayon__884948.out
+   Power=
+   NtasksPerTRES:0
+
+=== RUN INSTANTIATION ===
+{args: 1 5000, environment_variables: {OMP_NUM_THREADS: 1, RAYON_NUM_THREADS: 1}}
+
+===== BUILD =====
+warning: unused import: `Duration`
+ --> src/main.rs:4:26
+  |
+4 | use std::time::{Instant, Duration};
+  |                          ^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `crate::cfdio::writedatafiles`
+ --> src/main.rs:6:5
+  |
+6 | use crate::cfdio::writedatafiles;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `iproduct`
+ --> src/main.rs:8:17
+  |
+8 | use itertools::{iproduct, Itertools};
+  |                 ^^^^^^^^
+
+warning: unused import: `Itertools`
+ --> src/main.rs:8:27
+  |
+8 | use itertools::{iproduct, Itertools};
+  |                           ^^^^^^^^^
+
+warning: value assigned to `val` is never read
+  --> src/cfdio.rs:56:13
+   |
+56 |     let mut val: f64 = 0.0;
+   |             ^^^
+   |
+   = help: maybe it is overwritten before being read?
+   = note: `#[warn(unused_assignments)]` on by default
+
+warning: unused variable: `re`
+  --> src/main.rs:36:9
+   |
+36 |     let re = re / (scalefactor as f64);
+   |         ^^ help: if this is intentional, prefix it with an underscore: `_re`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: function `writedatafiles` is never used
+ --> src/cfdio.rs:5:8
+  |
+5 | pub fn writedatafiles(psi: &Array2<f64>, m:&i64, n:&i64, scalefactor:&i64) {
+  |        ^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(dead_code)]` on by default
+
+warning: function `hue2rgb` is never used
+  --> src/cfdio.rs:43:4
+   |
+43 | fn hue2rgb(hue:f64) ->  (i64,i64,i64) {
+   |    ^^^^^^^
+
+warning: function `colfunc` is never used
+  --> src/cfdio.rs:53:4
+   |
+53 | fn colfunc(x:f64) -> f64 {
+   |    ^^^^^^^
+
+warning: `cfd` (bin "cfd") generated 9 warnings (run `cargo fix --bin "cfd"` to apply 4 suggestions)
+    Finished release [optimized] target(s) in 0.35s
+
+===== RUN =====
+Scale Factor = 1, iterations = 5000
+Reynolds number = 0
+Running CFD on 32 x 32 grid in parallel
+Starting main loop...
+Completed iteration 1000
+Completed iteration 2000
+Completed iteration 3000
+Completed iteration 4000
+Completed iteration 5000
+... finished!
+Time for 5000 iterations was 0.061098012 seconds
+Each iteration took 1.22196024e-5 seconds
+real 0.07
+user 0.05
+sys 0.03
