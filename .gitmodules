@@ -1,0 +1,3 @@
+[submodule "eurocc_cfd_optimised"]
+	path = eurocc_cfd
+	url = https://github.com/EdmundGoodman/eurocc_cfd_optimised

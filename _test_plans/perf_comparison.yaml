@@ -8,7 +8,7 @@ run_configurations:
       "mem": 60000
     module_loads: []
     environment_variables: {}
-    directory: "../C-SER"
+    directory: "./generated_results/eurocc_cfd-kudu-results/eurocc_cfd/C-SER"
     build_commands:
       - "make"
     run_command: "./cfd"
@@ -22,7 +22,7 @@ run_configurations:
       "mem": 60000
     module_loads: []
     environment_variables: {}
-    directory: "../F-SER"
+    directory: "./generated_results/eurocc_cfd-kudu-results/eurocc_cfd/F-SER"
     build_commands:
       - "make"
     run_command: "./cfd"
@@ -36,7 +36,7 @@ run_configurations:
       "mem": 60000
     module_loads: []
     environment_variables: {}
-    directory: "../cfd"
+    directory: "./generated_results/eurocc_cfd-kudu-results/eurocc_cfd/cfd"
     build_commands:
       - "cargo build --release"
     run_command: "./target/release/cfd"
@@ -50,7 +50,7 @@ run_configurations:
       "mem": 60000
     module_loads: []
     environment_variables: {}
-    directory: "../cfd-opt"
+    directory: "./generated_results/eurocc_cfd-kudu-results/eurocc_cfd/cfd-opt"
     build_commands:
       - "cargo build --release"
     run_command: "./target/release/cfd"
@@ -64,7 +64,7 @@ run_configurations:
       "mem": 60000
     module_loads: []
     environment_variables: {}
-    directory: "../C-OMP"
+    directory: "./generated_results/eurocc_cfd-kudu-results/eurocc_cfd/C-OMP"
     build_commands:
       - "make"
     run_command: "./cfd"
@@ -78,7 +78,7 @@ run_configurations:
       "mem": 60000
     module_loads: []
     environment_variables: {}
-    directory: "../F-OMP"
+    directory: "./generated_results/eurocc_cfd-kudu-results/eurocc_cfd/F-OMP"
     build_commands:
       - "make"
     run_command: "./cfd"
@@ -92,7 +92,7 @@ run_configurations:
       "mem": 60000
     module_loads: []
     environment_variables: {}
-    directory: "../cfd_rayon"
+    directory: "./generated_results/eurocc_cfd-kudu-results/eurocc_cfd/cfd_rayon"
     build_commands:
       - "cargo build --release"
     run_command: "./target/release/cfd"
@@ -106,7 +106,7 @@ run_configurations:
       "mem": 60000
     module_loads: []
     environment_variables: {}
-    directory: "../cfd_rayon-opt"
+    directory: "./generated_results/eurocc_cfd-kudu-results/eurocc_cfd/cfd_rayon-opt"
     build_commands:
       - "cargo build --release"
     run_command: "./target/release/cfd"
