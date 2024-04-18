@@ -41,20 +41,6 @@ run_configurations:
       - "cargo build --release"
     run_command: "./target/release/cfd"
 
-  "rust-serial-optimised":
-    sbatch_config:
-      "nodes": 1
-      "ntasks-per-node": 1
-      "cpus-per-task": 1
-      "exclusive": "mcs"
-      "mem": 60000
-    module_loads: []
-    environment_variables: {}
-    directory: "./generated_results/eurocc_cfd-kudu-results/eurocc_cfd/cfd-opt"
-    build_commands:
-      - "cargo build --release"
-    run_command: "./target/release/cfd"
-
   "cpp-openmp":
     sbatch_config:
       "nodes": 1
@@ -97,28 +83,12 @@ run_configurations:
       - "cargo build --release"
     run_command: "./target/release/cfd"
 
-  "rust-rayon-optimised":
-    sbatch_config:
-      "nodes": 1
-      "ntasks-per-node": 1
-      "cpus-per-task": 32
-      "exclusive": "mcs"
-      "mem": 60000
-    module_loads: []
-    environment_variables: {}
-    directory: "./generated_results/eurocc_cfd-kudu-results/eurocc_cfd/cfd_rayon-opt"
-    build_commands:
-      - "cargo build --release"
-    run_command: "./target/release/cfd"
-
 benches:
   "serial":
-    # enabled: False
     run_configurations:
+      - "rust-serial"
       - "cpp-serial"
       - "fortran-serial"
-      - "rust-serial"
-      # - "rust-serial-optimised"
     reruns:
       number: 5
       unaggregatable_metrics:
@@ -145,8 +115,8 @@ benches:
         "Total time (s)": "Time for\\s+\\d+ iterations was\\s+([\\d\\.eE\\-+]+)\\s+seconds"
         "Iteration time (s)": "Each i?n?d?i?v?i?d?u?a?l? ?iteration took\\s+([\\d\\.eE\\-+]+)\\s+seconds"
       derived_metrics:
-        "Iterations per second": "1 / float(metrics['Iteration time (s)'])"
-        "Execution time relative to C++": "float(metrics['Iteration time (s)']) / float(_corresponding_metrics['cpp-serial']['Iteration time (s)'])"
+        "Iterations per second": "1 / metrics['Iteration time (s)']"
+        "Execution time relative to C++": "metrics['Iteration time (s)'] / _corresponding_metrics['cpp-serial']['Iteration time (s)']"
       line_plots:
         - title: "Serial Implementation Comparison"
           x: "Problem size"
@@ -156,17 +126,12 @@ benches:
           x: "Problem size"
           y: "Execution time relative to C++"
           y_lim: [0.6, 2.2]
-      data_exports:
-        - export_path: null
-          enabled: False
 
   "parallel":
-    # enabled: False
     run_configurations:
+      - "rust-rayon"
       - "cpp-openmp"
       - "fortran-openmp"
-      - "rust-rayon"
-      # - "rust-rayon-optimised"
     reruns:
       number: 5
       unaggregatable_metrics:
@@ -202,23 +167,9 @@ benches:
         "Iteration time (s)": "Each i?n?d?i?v?i?d?u?a?l? ?iteration took\\s+([\\d\\.eE\\-+]+)\\s+seconds"
         "Thread count": "=== RUN INSTANTIATION ===\n\\{.*environment_variables: \\{.*OMP_NUM_THREADS: (\\d+),.*\\}"
       derived_metrics:
-        "Iterations per second": "1 / float(metrics['Iteration time (s)'])"
-        "Execution time relative to C++": "float(metrics['Iteration time (s)']) / float(_corresponding_metrics['cpp-openmp']['Iteration time (s)'])"
+        "Iterations per second": "1 / metrics['Iteration time (s)']"
+        "Execution time relative to C++": "metrics['Iteration time (s)'] / _corresponding_metrics['cpp-openmp']['Iteration time (s)']"
       line_plots:
-        # - title: "Execution time scaling with problem size"
-        #   x: "Problem size"
-        #   y: "Total time (s)"
-        #   y_log: True
-        #   # split_metrics: ["Thread count"]
-        #   fix_metrics:
-        #     "Thread count": "32"
-        #   enabled: False
-        # - title: "Relative execution times to C++"
-        #   x: "Problem size"
-        #   y: "Execution time relative to C++"
-        #   fix_metrics:
-        #     "Thread count": "32"
-        #   enabled: False
         - title: "Iterations per second scaling with number of threads"
           x: "Thread count"
           y: "Iterations per second"
@@ -237,6 +188,3 @@ benches:
           y_log: True
           fix_metrics:
             "Problem size": "128"
-      data_exports:
-        - export_path: null
-          enabled: False
