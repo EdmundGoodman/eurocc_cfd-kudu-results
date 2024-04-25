@@ -122,10 +122,12 @@ benches:
           x: "Problem size"
           y: "Total time (s)"
           y_log: True
+          tikz_output: "tikz_outputs/replication_study/serial.tex"
         - title: "Relative execution times to C++"
           x: "Problem size"
           y: "Execution time relative to C++"
           y_lim: [0.6, 2.2]
+          tikz_output: "tikz_outputs/replication_study/serial_relative.tex"
 
   "parallel":
     run_configurations:
@@ -176,15 +178,18 @@ benches:
           y_log: True
           fix_metrics:
             "Problem size": "1"
+          tikz_output: "tikz_outputs/replication_study/iterations_threads_1.tex"
         - title: "Iterations per second scaling with number of threads"
           x: "Thread count"
           y: "Iterations per second"
           y_log: True
           fix_metrics:
             "Problem size": "16"
+          tikz_output: "tikz_outputs/replication_study/iterations_threads_16.tex"
         - title: "Iterations per second scaling with number of threads"
           x: "Thread count"
           y: "Iterations per second"
           y_log: True
           fix_metrics:
             "Problem size": "128"
+          tikz_output: "tikz_outputs/replication_study/iterations_threads_128.tex"
